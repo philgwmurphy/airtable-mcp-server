@@ -1,7 +1,7 @@
 {
   "name": "airtable-mcp-server",
   "version": "1.4.1",
-  "description": "Airtable Model Context Protocol Server, for allowing AI systems to interact with your Airtable bases",
+  "description": "A Model Context Protocol server that provides read and write access to Airtable databases. This server enables LLMs to inspect database schemas, then read and write records.",
   "license": "MIT",
   "author": "Adam Jones (domdomegg)",
   "repository": {
@@ -23,6 +23,7 @@
     "clean": "rm -rf dist",
     "build": "tsc --project tsconfig.build.json && shx chmod +x dist/index.js",
     "build:watch": "nodemon --watch src --ext ts --exec \"npm run build\"",
+    "build:dxt": "./build-dxt.sh",
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {

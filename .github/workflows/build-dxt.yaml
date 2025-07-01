@@ -1,0 +1,50 @@
+name: Build DXT Extension
+
+on: 
+  push:
+  pull_request:
+  release:
+    types: [ published ]
+
+jobs:
+  build-dxt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CI: true
+    steps:
+      - name: Checkout ${{ github.sha }}
+        uses: actions/checkout@v4
+      
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build DXT package
+        run: ./build-dxt.sh
+      
+      # This unzipping is necessary as a workaround for https://github.com/actions/upload-artifact/issues/39
+      - name: Prepare artifact
+        run: |
+          mkdir .github/tmp
+          unzip airtable-mcp-server.dxt -d .github/tmp
+      
+      - name: Publish DXT artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: airtable-mcp-server-dxt
+          path: .github/tmp/*
+      
+      - name: Upload DXT package as release asset
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./airtable-mcp-server.dxt
