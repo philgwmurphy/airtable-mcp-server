@@ -16,4 +16,7 @@ const main = async () => {
   await server.connect(transport);
 };
 
-await main();
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

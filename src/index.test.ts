@@ -26,9 +26,17 @@ describe('Main Application', () => {
     // Set argv to simulate no arguments
     process.argv = ['node', 'index.js'];
     process.env = {};
+    const mockExit = vi.spyOn(process, 'exit').mockImplementation(() => undefined as never);
 
-    // Verify error
-    expect(() => import('./index.js')).rejects.toThrow('API key');
+    // Import the module and give it a chance to run
+    await import('./index.js');
+    await new Promise<void>((resolve) => {
+      setTimeout(() => resolve(), 100);
+    });
+
+    // Verify it tried to exit with error
+    expect(mockExit).toHaveBeenCalledWith(1);
+    mockExit.mockRestore();
   });
 
   test('creates services and connects server with valid API key from command line', async () => {
