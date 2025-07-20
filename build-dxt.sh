@@ -4,10 +4,6 @@ set -euo pipefail
 
 # Build the project first
 echo "Building project..."
-
-# Remove devDependencies
-rm -rf node_modules
-npm ci --production
 npm run build
 
 # Update manifest.json with version from package.json
@@ -16,9 +12,14 @@ VERSION=$(node -p "require('./package.json').version")
 sed "s/{{VERSION}}/$VERSION/g" manifest.json > manifest.json.tmp
 mv manifest.json.tmp manifest.json
 
+# Remove devDependencies
+echo "Removing devDependencies from node_modules..."
+rm -rf node_modules
+npm ci --omit=dev --audit false --fund false
+
 # Create the DXT package
 echo "Creating DXT package..."
-rm -f airtable-mcp-server.dxt
+rm -rf airtable-mcp-server.dxt
 # --no-dir-entries: https://github.com/anthropics/dxt/issues/18#issuecomment-3021467806
 zip --recurse-paths --no-dir-entries \
   airtable-mcp-server.dxt \
@@ -36,7 +37,8 @@ sed "s/$VERSION/{{VERSION}}/g" manifest.json > manifest.json.tmp
 mv manifest.json.tmp manifest.json
 
 # Restore full node_modules
-npm ci
+echo "Restoring node_modules..."
+npm ci --audit false --fund false
 
 echo
 echo "DXT package created: airtable-mcp-server.dxt"
