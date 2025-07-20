@@ -1,14 +1,13 @@
 import {
   describe, test, expect, vi, beforeEach, MockedFunction, ArgumentsType,
 } from 'vitest';
-import nodeFetch, { Response } from 'node-fetch';
 import { AirtableService } from './airtableService.js';
 
 describe('AirtableService', () => {
   const mockApiKey = 'test-api-key';
   const mockBaseUrl = 'https://api.airtable.com';
   let service: AirtableService;
-  let mockFetch: MockedFunction<(...args: ArgumentsType<typeof nodeFetch>) => Promise<Partial<Response>>>;
+  let mockFetch: MockedFunction<(...args: ArgumentsType<typeof fetch>) => Promise<Partial<Response>>>;
 
   beforeEach(() => {
     // Create a mock fetch function that we'll inject
@@ -18,17 +17,17 @@ describe('AirtableService', () => {
     });
 
     // Initialize service with our mock fetch
-    service = new AirtableService(mockApiKey, mockBaseUrl, mockFetch as typeof nodeFetch);
+    service = new AirtableService(mockApiKey, mockBaseUrl, mockFetch as typeof fetch);
   });
 
   describe('constructor', () => {
     test('initializes with default base URL', () => {
-      const defaultService = new AirtableService(mockApiKey, undefined, mockFetch as typeof nodeFetch);
+      const defaultService = new AirtableService(mockApiKey, undefined, mockFetch as typeof fetch);
       expect(defaultService).toBeInstanceOf(AirtableService);
     });
 
     test('initializes with custom base URL', () => {
-      const customService = new AirtableService(mockApiKey, 'https://custom.url', mockFetch as typeof nodeFetch);
+      const customService = new AirtableService(mockApiKey, 'https://custom.url', mockFetch as typeof fetch);
       expect(customService).toBeInstanceOf(AirtableService);
     });
   });

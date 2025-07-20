@@ -1,4 +1,3 @@
-import nodeFetch, { RequestInit } from 'node-fetch';
 import { z } from 'zod';
 import {
   IAirtableService,
@@ -20,12 +19,12 @@ export class AirtableService implements IAirtableService {
 
   private readonly baseUrl: string;
 
-  private readonly fetch: typeof nodeFetch;
+  private readonly fetch: typeof fetch;
 
   constructor(
     apiKey: string = process.env.AIRTABLE_API_KEY || '',
     baseUrl: string = 'https://api.airtable.com',
-    fetch: typeof nodeFetch = nodeFetch,
+    fetchFn: typeof fetch = fetch,
   ) {
     if (!apiKey) {
       throw new Error('airtable-mcp-server: No API key provided. Set it in the `AIRTABLE_API_KEY` environment variable');
@@ -33,7 +32,7 @@ export class AirtableService implements IAirtableService {
 
     this.apiKey = apiKey;
     this.baseUrl = baseUrl;
-    this.fetch = fetch;
+    this.fetch = fetchFn;
   }
 
   private async fetchFromAPI<T>(endpoint: string, schema: z.ZodSchema<T>, options: RequestInit = {}): Promise<T> {
