@@ -13,9 +13,10 @@ sed "s/{{VERSION}}/$VERSION/g" manifest.json > manifest.json.tmp
 mv manifest.json.tmp manifest.json
 
 # Remove devDependencies
-echo "Removing devDependencies from node_modules..."
+echo "Removing devDependencies and types from node_modules..."
 rm -rf node_modules
 npm ci --omit=dev --audit false --fund false
+find node_modules -name "*.ts" -type f -delete 2>/dev/null || true
 
 # Create the DXT package
 echo "Creating DXT package..."
@@ -41,4 +42,4 @@ echo "Restoring node_modules..."
 npm ci --audit false --fund false
 
 echo
-echo "DXT package created: airtable-mcp-server.dxt"
+echo "DXT package created: airtable-mcp-server.dxt ($(du -h airtable-mcp-server.dxt | cut -f1))"
