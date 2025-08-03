@@ -18,7 +18,6 @@ Keep the token handy, you'll need it in the next step. It should look something 
 - [Claude Desktop](#claude-desktop)
 - [Cursor](#cursor)
 - [Cline](#cline)
-- [VS Code](#vs-code)
 
 ### Claude Desktop
 
