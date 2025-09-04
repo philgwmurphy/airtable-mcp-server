@@ -1,5 +1,5 @@
 {
-  "name": "airtable-mcp-server",
+  "name": "io.github.domdomegg/airtable-mcp-server",
   "description": "A Model Context Protocol server that provides read and write access to Airtable databases. This server enables LLMs to inspect database schemas, then read and write records.",
   "status": "active",
   "repository": {
@@ -15,6 +15,28 @@
       "name": "airtable-mcp-server",
       "version": "1.6.1",
       "runtime_hint": "npx",
+      "environment_variables": [
+        {
+          "name": "AIRTABLE_API_KEY",
+          "description": "Airtable personal access token (e.g., pat123.abc123). Create at https://airtable.com/create/tokens/new with scopes: schema.bases:read, data.records:read, and optionally schema.bases:write and data.records:write.",
+          "is_required": true,
+          "is_secret": true
+        }
+      ]
+    },
+    {
+      "registry_name": "docker",
+      "name": "domdomegg/airtable-mcp-server",
+      "version": "1.6.1",
+      "runtime_hint": "docker",
+      "package_arguments": [
+        {
+          "type": "positional",
+          "value_hint": "AIRTABLE_API_KEY",
+          "description": "Airtable API key will be passed as environment variable",
+          "is_required": true
+        }
+      ],
       "environment_variables": [
         {
           "name": "AIRTABLE_API_KEY",

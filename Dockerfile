@@ -20,6 +20,9 @@ RUN npm run build
 # Start a new stage for the final image
 FROM node:24-alpine AS release
 
+# Add MCP registry validation label
+LABEL io.modelcontextprotocol.server.name="io.github.domdomegg/airtable-mcp-server"
+
 # Set working directory
 WORKDIR /app
 

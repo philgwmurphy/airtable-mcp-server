@@ -15,6 +15,7 @@
     "dist"
   ],
   "bin": "dist/index.js",
+  "mcpName": "io.github.domdomegg/airtable-mcp-server",
   "scripts": {
     "start": "npm run build && node ./dist/index.js",
     "test": "vitest run",
