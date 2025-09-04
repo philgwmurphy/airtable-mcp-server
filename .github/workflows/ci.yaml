@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
-      contents: read
+      contents: write  # Required for creating GitHub releases
       id-token: write  # Required for MCP registry OIDC authentication
     env:
       CI: true
