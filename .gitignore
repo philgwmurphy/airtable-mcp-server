@@ -121,4 +121,4 @@ dist
 build/
 dist/
 server/
-airtable-mcp-server.dxt
+airtable-mcp-server.mcpb

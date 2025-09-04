@@ -23,7 +23,7 @@
     "clean": "rm -rf dist",
     "build": "tsc --project tsconfig.build.json",
     "build:watch": "nodemon --watch src --ext ts --exec \"npm run build\"",
-    "build:dxt": "./build-dxt.sh",
+    "build:mcpb": "./build-mcpb.sh",
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {

@@ -18,12 +18,12 @@ rm -rf node_modules
 npm ci --omit=dev --audit false --fund false
 find node_modules -name "*.ts" -type f -delete 2>/dev/null || true
 
-# Create the DXT package
-echo "Creating DXT package..."
-rm -rf airtable-mcp-server.dxt
-# --no-dir-entries: https://github.com/anthropics/dxt/issues/18#issuecomment-3021467806
+# Create the MCP Bundle
+echo "Creating MCP Bundle..."
+rm -rf airtable-mcp-server.mcpb
+# --no-dir-entries: https://github.com/anthropics/mcpb/issues/18#issuecomment-3021467806
 zip --recurse-paths --no-dir-entries \
-  airtable-mcp-server.dxt \
+  airtable-mcp-server.mcpb \
   manifest.json \
   icon.png \
   dist/ \
@@ -42,4 +42,4 @@ echo "Restoring node_modules..."
 npm ci --audit false --fund false
 
 echo
-echo "DXT package created: airtable-mcp-server.dxt ($(du -h airtable-mcp-server.dxt | cut -f1))"
+echo "MCP Bundle created: airtable-mcp-server.mcpb ($(du -h airtable-mcp-server.mcpb | cut -f1))"

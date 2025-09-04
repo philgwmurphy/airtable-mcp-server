@@ -27,12 +27,12 @@ Keep the token handy, you'll need it in the next step. It should look something 
 2. Click 'Browse Extensions' and find 'Airtable MCP Server'
 3. Click 'Install' and paste in your API key
 
-#### (Advanced) Alternative: Via manual .dxt installation
+#### (Advanced) Alternative: Via manual .mcpb installation
 
-1. Find the latest dxt build in [the GitHub Actions history](https://github.com/domdomegg/airtable-mcp-server/actions/workflows/dxt.yaml?query=branch%3Amaster) (the top one)
-2. In the 'Artifacts' section, download the `airtable-mcp-server-dxt` file
-3. Rename the `.zip` file to `.dxt`
-4. Double-click the `.dxt` file to open with Claude Desktop
+1. Find the latest mcpb build in [the GitHub Actions history](https://github.com/domdomegg/airtable-mcp-server/actions/workflows/mcpb.yaml?query=branch%3Amaster) (the top one)
+2. In the 'Artifacts' section, download the `airtable-mcp-server-mcpb` file
+3. Rename the `.zip` file to `.mcpb`
+4. Double-click the `.mcpb` file to open with Claude Desktop
 5. Click "Install" and configure with your API key
 
 #### (Advanced) Alternative: Via JSON configuration
