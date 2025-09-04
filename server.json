@@ -1,4 +1,5 @@
 {
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
   "name": "io.github.domdomegg/airtable-mcp-server",
   "description": "A Model Context Protocol server that provides read and write access to Airtable databases. This server enables LLMs to inspect database schemas, then read and write records.",
   "status": "active",
@@ -7,13 +8,13 @@
     "source": "github"
   },
   "version_detail": {
-    "version": "1.6.1"
+    "version": "{{VERSION}}"
   },
   "packages": [
     {
       "registry_name": "npm",
       "name": "airtable-mcp-server",
-      "version": "1.6.1",
+      "version": "{{VERSION}}",
       "runtime_hint": "npx",
       "environment_variables": [
         {
@@ -27,7 +28,7 @@
     {
       "registry_name": "docker",
       "name": "domdomegg/airtable-mcp-server",
-      "version": "1.6.1",
+      "version": "{{VERSION}}",
       "runtime_hint": "docker",
       "package_arguments": [
         {
@@ -49,8 +50,8 @@
     {
       "registry_name": "mcpb",
       "name": "airtable-mcp-server",
-      "version": "1.6.1",
-      "download_url": "https://github.com/domdomegg/airtable-mcp-server/releases/download/v1.6.1/airtable-mcp-server.mcpb",
+      "version": "{{VERSION}}",
+      "download_url": "https://github.com/domdomegg/airtable-mcp-server/releases/download/v{{VERSION}}/airtable-mcp-server.mcpb",
       "user_config": [
         {
           "name": "api_key",

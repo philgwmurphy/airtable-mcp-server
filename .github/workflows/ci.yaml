@@ -53,6 +53,9 @@ jobs:
     needs: ci
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write  # Required for MCP registry OIDC authentication
     env:
       CI: true
     steps:
@@ -69,6 +72,11 @@ jobs:
         run: npm run build --if-present
       - name: Build MCP Bundle
         run: npm run build:mcpb
+      - name: Update server.json version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          sed "s/{{VERSION}}/$VERSION/g" server.json > server.json.tmp
+          mv server.json.tmp server.json
       - name: Publish to NPM
         run: npm publish
         env:
@@ -103,3 +111,9 @@ jobs:
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Install MCP Publisher
+      #   run: # TODO: Install mcp-publisher
+      # - name: Login to MCP Registry
+      #   run: mcp-publisher login github-oidc
+      # - name: Publish to MCP Registry
+      #   run: mcp-publisher publish
